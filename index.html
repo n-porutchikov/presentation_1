@@ -2,744 +2,993 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Люди, которые изменили театр</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Italiana&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --velvet:#170506;
-    --velvet-2:#240808;
-    --wine:#3a0b10;
-    --wine-2:#5a1220;
-    --gold:#c9a961;
-    --gold-2:#e0c88a;
-    --gold-3:#8b7440;
-    --bone:#f0e6d2;
-    --bone-2:#c9bda6;
-    --muted:#8a7a6a;
-    --muted-2:#5a4d42;
-    --line:rgba(201,169,97,.28);
-    --line-2:rgba(201,169,97,.12);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{height:100%;}
+:root{
+  --velvet:#170506;
+  --velvet-2:#240808;
+  --wine:#3a0b10;
+  --wine-2:#5a1220;
+  --gold:#c9a961;
+  --gold-2:#e0c88a;
+  --gold-3:#8b7440;
+  --bone:#f0e6d2;
+  --bone-2:#c9bda6;
+  --muted:#8a7a6a;
+  --muted-2:#5a4d42;
+  --line:rgba(201,169,97,.28);
+  --line-2:rgba(201,169,97,.12);
+
+  /* A4: все размеры страницы рассчитываются от физического листа */
+  --page-w:210mm;
+  --page-h:297mm;
+  --page-pad-x:17mm;
+  --page-pad-top:14mm;
+  --page-pad-bottom:16mm;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html{
+  min-width:0;
+  background:#0a0303;
+}
+
+body{
+  font-family:"Fraunces","Georgia",serif;
+  background:#0a0303;
+  color:var(--bone);
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"lnum","kern","liga","ss01";
+  margin:0;
+  padding:24px 0 60px;
+}
+
+/* Один section = одна физическая страница */
+.deck{
+  width:var(--page-w);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.slide{
+  position:relative;
+  width:var(--page-w);
+  height:var(--page-h);
+  min-height:var(--page-h);
+  flex:0 0 var(--page-h);
+  background:var(--velvet);
+  padding:var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
+  isolation:isolate;
+  overflow:hidden;
+
+  box-shadow:
+    0 28px 70px -20px rgba(0,0,0,.9),
+    0 0 0 1px rgba(201,169,97,.15);
+
+  break-after:page;
+  page-break-after:always;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+.slide:last-child{
+  break-after:auto;
+  page-break-after:auto;
+}
+
+/* Декоративный фон не влияет на геометрию страницы */
+.slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.35) 0,
+      rgba(0,0,0,0) 30px,
+      rgba(255,255,255,.025) 60px,
+      rgba(0,0,0,0) 90px,
+      rgba(0,0,0,.35) 120px
+    );
+  pointer-events:none;
+  z-index:0;
+  opacity:.7;
+}
+
+.slide::after{
+  content:"";
+  position:absolute;
+  top:-320px;
+  left:50%;
+  transform:translateX(-50%);
+  width:1200px;
+  height:600px;
+  background:
+    radial-gradient(ellipse at 50% 100%,
+      rgba(224,200,138,.16) 0%,
+      rgba(224,200,138,.06) 25%,
+      transparent 55%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.frame{
+  position:absolute;
+  inset:7mm;
+  border:1px solid var(--line);
+  pointer-events:none;
+  z-index:2;
+}
+
+.frame::before,
+.frame::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  border:1px solid var(--gold);
+}
+
+.frame::before{
+  top:-1px;
+  left:-1px;
+  border-right:none;
+  border-bottom:none;
+}
+
+.frame::after{
+  bottom:-1px;
+  right:-1px;
+  border-left:none;
+  border-top:none;
+}
+
+/* Chrome */
+.chrome{
+  position:relative;
+  z-index:3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:9mm;
+  padding-bottom:4mm;
+  font-family:"Jost",sans-serif;
+  font-size:9px;
+  letter-spacing:2.8px;
+  text-transform:uppercase;
+  color:var(--bone-2);
+  font-weight:400;
+  border-bottom:1px solid var(--line-2);
+  margin-bottom:8mm;
+}
+
+.chrome-mark,
+.chrome-folio{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.chrome-mark::before{
+  content:"";
+  width:5px;
+  height:5px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  box-shadow:0 0 10px rgba(201,169,97,.6);
+}
+
+.chrome-folio b{
+  font-family:"Fraunces",serif;
+  font-weight:400;
+  font-style:italic;
+  font-size:15px;
+  color:var(--gold-2);
+  letter-spacing:0;
+  text-transform:none;
+}
+
+.chrome-folio .sep{
+  color:var(--gold-3);
+  margin:0 3px;
+}
+
+/* Typography */
+h1{
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-size:62px;
+  line-height:.94;
+  letter-spacing:-.03em;
+  color:var(--bone);
+  margin-bottom:20px;
+  font-variation-settings:"opsz" 144,"SOFT" 50,"WONK" 0;
+}
+
+h1 .kicker{
+  display:block;
+  font-family:"Italiana",serif;
+  font-size:.20em;
+  letter-spacing:.48em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+  font-weight:400;
+}
+
+h1 em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--gold-2);
+  text-shadow:0 0 30px rgba(224,200,138,.25);
+}
+
+h2{
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-size:39px;
+  line-height:1.03;
+  letter-spacing:-.025em;
+  color:var(--bone);
+  margin-bottom:19px;
+  max-width:24ch;
+  font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;
+}
+
+h2 em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--gold-2);
+}
+
+h2 .kicker{
+  display:block;
+  font-family:"Jost",sans-serif;
+  font-size:8.5px;
+  font-weight:500;
+  letter-spacing:3.1px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+h3{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-family:"Jost",sans-serif;
+  font-size:8.5px;
+  font-weight:500;
+  letter-spacing:2.8px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin:18px 0 9px;
+}
+
+h3::before{
+  content:"";
+  width:4px;
+  height:4px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  flex-shrink:0;
+}
+
+h3::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,var(--line),transparent);
+}
+
+p,li{
+  font-family:"Fraunces",serif;
+  font-size:14.2px;
+  line-height:1.48;
+  color:var(--bone-2);
+  margin-bottom:9px;
+  font-weight:300;
+  letter-spacing:.002em;
+  max-width:62ch;
+  font-variation-settings:"opsz" 14,"SOFT" 40;
+}
+
+p strong,p b,li strong,li b{
+  color:var(--bone);
+  font-weight:500;
+  font-style:italic;
+}
+
+p em{
+  color:var(--gold-2);
+  font-style:italic;
+  font-weight:400;
+}
+
+.dropcap::first-letter{
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:4.6em;
+  line-height:.82;
+  float:left;
+  padding:5px 13px 0 0;
+  color:var(--gold-2);
+  text-shadow:0 0 25px rgba(224,200,138,.3);
+}
+
+ul{
+  padding-left:0;
+  list-style:none;
+  margin-bottom:12px;
+}
+
+ul li{
+  padding-left:27px;
+  position:relative;
+  margin-bottom:7px;
+}
+
+ul li::before{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:10px;
+  width:5px;
+  height:5px;
+  background:var(--gold);
+  transform:rotate(45deg);
+}
+
+ul li:nth-child(even)::before{
+  background:var(--gold-3);
+}
+
+ul.numbered{
+  counter-reset:n;
+}
+
+ul.numbered li{
+  counter-increment:n;
+  padding-left:61px;
+  margin-bottom:11px;
+}
+
+ul.numbered li::before{
+  content:counter(n,upper-roman);
+  width:auto;
+  height:auto;
+  top:-3px;
+  left:0;
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:27px;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--gold-2);
+  background:none;
+  transform:none;
+  text-shadow:0 0 16px rgba(224,200,138,.2);
+}
+
+/* Layouts */
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:38px;
+  align-items:start;
+}
+
+.two-col.wide-left{
+  grid-template-columns:1.15fr .85fr;
+}
+
+.two-col.narrow-left{
+  grid-template-columns:.85fr 1.15fr;
+}
+
+/* Images */
+.img-frame{
+  position:relative;
+  padding:8px;
+  background:linear-gradient(180deg,rgba(201,169,97,.06),rgba(201,169,97,.02));
+  border:1px solid var(--line);
+  box-shadow:
+    inset 0 0 30px rgba(201,169,97,.05),
+    0 16px 30px -18px rgba(0,0,0,.8);
+  overflow:hidden;
+  display:block;
+  width:100%;
+  max-width:100%;
+}
+
+.img-frame::before,
+.img-frame::after{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  z-index:3;
+  box-shadow:0 0 10px rgba(201,169,97,.7);
+}
+
+.img-frame::before{
+  top:-3px;
+  left:-3px;
+}
+
+.img-frame::after{
+  bottom:-3px;
+  right:-3px;
+}
+
+.img-frame.hug{
+  display:inline-block;
+  width:auto;
+  max-width:100%;
+}
+
+.img-frame.hug .landscape-img{
+  width:auto;
+  max-width:100%;
+  height:auto;
+}
+
+.portrait-img{
+  display:block;
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  object-position:center 15%;
+  background:#0f0303;
+  position:relative;
+  z-index:1;
+  border-radius:2px;
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+.landscape-img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:390px;
+  object-fit:cover;
+  background:#0f0303;
+  position:relative;
+  z-index:1;
+  border-radius:2px;
+}
+
+.img-ph{
+  position:relative;
+  background:
+    repeating-linear-gradient(-45deg,rgba(201,169,97,.05) 0 1px,transparent 1px 14px),
+    linear-gradient(180deg,rgba(58,11,16,.7) 0%,rgba(23,5,6,.9) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--bone-2);
+  font-family:"Jost",sans-serif;
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  padding:20px;
+  min-height:200px;
+  line-height:1.6;
+  font-weight:400;
+  border-radius:2px;
+}
+
+.img-ph::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:1px solid rgba(201,169,97,.25);
+  pointer-events:none;
+}
+
+.img-ph span{
+  position:relative;
+  z-index:1;
+  padding:5px 11px;
+  background:rgba(23,5,6,.6);
+  border:1px solid rgba(201,169,97,.35);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+
+.img-ph.tall{min-height:350px;}
+.img-ph.wide{min-height:190px;}
+
+.caption{
+  font-family:"Jost",sans-serif;
+  font-size:8px;
+  letter-spacing:2.3px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:11px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:400;
+}
+
+.caption::before{
+  content:"";
+  width:20px;
+  height:1px;
+  background:var(--gold-3);
+}
+
+/* Stats */
+.stat{
+  padding:14px 0;
+  border-top:1px solid var(--line-2);
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+}
+
+.stat:last-child{
+  border-bottom:1px solid var(--line-2);
+}
+
+.stat .n{
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:52px;
+  line-height:.85;
+  letter-spacing:-.03em;
+  color:var(--gold-2);
+  text-shadow:0 0 25px rgba(224,200,138,.25);
+  font-variation-settings:"opsz" 144,"SOFT" 50;
+}
+
+.stat .lbl{
+  font-family:"Jost",sans-serif;
+  font-size:8.5px;
+  letter-spacing:2.3px;
+  text-transform:uppercase;
+  color:var(--muted);
+  max-width:22ch;
+  line-height:1.6;
+  font-weight:400;
+}
+
+/* Table */
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.2px;
+  border-top:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+}
+
+th,td{
+  padding:11px 14px;
+  text-align:left;
+  vertical-align:top;
+  color:var(--bone-2);
+  border-bottom:1px solid var(--line-2);
+  line-height:1.42;
+  font-weight:300;
+  font-family:"Fraunces",serif;
+}
+
+th{
+  background:transparent;
+  font-family:"Jost",sans-serif;
+  font-size:8px;
+  letter-spacing:2.7px;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+  border-bottom:1px solid var(--gold);
+}
+
+tr:last-child td{
+  border-bottom:none;
+}
+
+td:first-child{
+  font-family:"Fraunces",serif;
+  font-style:italic;
+  font-weight:300;
+  color:var(--gold-2);
+  font-size:15px;
+  width:32%;
+  font-variation-settings:"opsz" 144,"SOFT" 50;
+}
+
+/* Quote */
+blockquote{
+  position:relative;
+  padding:4px 0 4px 40px;
+  margin:15px 0;
+  font-family:"Fraunces",serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:16px;
+  line-height:1.4;
+  color:var(--bone);
+  letter-spacing:-.005em;
+  font-variation-settings:"opsz" 144,"SOFT" 60;
+}
+
+blockquote::before{
+  content:"“";
+  position:absolute;
+  left:0;
+  top:-15px;
+  font-family:"Fraunces",serif;
+  font-style:normal;
+  font-weight:300;
+  font-size:70px;
+  line-height:1;
+  color:var(--gold);
+  text-shadow:0 0 25px rgba(201,169,97,.4);
+}
+
+blockquote p{
+  font:inherit;
+  color:inherit;
+  margin:0;
+  max-width:none;
+}
+
+.quote-author{
+  display:block;
+  font-family:"Jost",sans-serif;
+  font-style:normal;
+  font-size:8px;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:9px;
+  font-weight:500;
+}
+
+.quote-author::before{
+  content:"—— ";
+  color:var(--gold);
+}
+
+/* Ornament */
+.ornament{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:16px 0;
+  color:var(--gold);
+}
+
+.ornament::before,
+.ornament::after{
+  content:"";
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-3),transparent);
+  flex:1;
+  max-width:160px;
+}
+
+.ornament i{
+  display:block;
+  width:5px;
+  height:5px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  box-shadow:0 0 10px rgba(201,169,97,.5);
+}
+
+.ornament i:nth-child(2){
+  width:8px;
+  height:8px;
+  background:var(--gold-2);
+}
+
+.big-num{
+  position:absolute;
+  right:-20px;
+  bottom:-90px;
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:340px;
+  line-height:.82;
+  letter-spacing:-.05em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(201,169,97,.14);
+  pointer-events:none;
+  z-index:1;
+  user-select:none;
+  font-variation-settings:"opsz" 144,"SOFT" 50;
+}
+
+/* Title page */
+.title-slide{
+  padding-top:13mm;
+  padding-bottom:18mm;
+}
+
+.title-slide .chrome{
+  border-bottom:1px solid var(--line);
+  margin-bottom:7mm;
+}
+
+.title-slide h1{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 16px;
+}
+
+.title-slide .lead{
+  font-family:"Fraunces",serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:17px;
+  line-height:1.4;
+  color:var(--bone-2);
+  max-width:650px;
+  margin:0 auto 24px;
+  text-align:center;
+  letter-spacing:-.005em;
+}
+
+.title-slide .lead em{
+  color:var(--gold-2);
+  font-weight:400;
+}
+
+.portraits{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  margin-top:10px;
+  position:relative;
+  z-index:2;
+}
+
+.portrait .meta{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:13px;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+}
+
+.portrait .name{
+  font-family:"Fraunces",serif;
+  font-weight:300;
+  font-size:18px;
+  line-height:1.12;
+  letter-spacing:-.015em;
+  color:var(--bone);
+  font-variation-settings:"opsz" 144,"SOFT" 50;
+}
+
+.portrait .role{
+  font-family:"Jost",sans-serif;
+  font-size:8px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:right;
+  flex-shrink:0;
+  line-height:1.6;
+  padding-top:4px;
+  font-weight:400;
+}
+
+.bulbs{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:18px;
+  position:relative;
+  z-index:3;
+}
+
+.bulbs i{
+  display:block;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:
+    0 0 5px rgba(224,200,138,.7),
+    0 0 11px rgba(224,200,138,.35);
+}
+
+.bulbs i:nth-child(3n+2){
+  background:var(--gold-3);
+  box-shadow:none;
+}
+
+.stage-footer{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:8mm;
+  text-align:center;
+  font-family:"Italiana",serif;
+  font-size:8.5px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--muted);
+  z-index:3;
+}
+
+.stage-footer .diamond{
+  color:var(--gold);
+  margin:0 11px;
+  text-shadow:0 0 10px rgba(201,169,97,.5);
+}
+
+/* Небольшие локальные корректировки для самых плотных страниц.
+   Содержание при этом не меняется. */
+.slide:nth-child(9) .numbered li{
+  margin-bottom:8px;
+}
+
+.slide:nth-child(9) .img-frame.hug{
+  margin-top:18px !important;
+}
+
+.slide:nth-child(12) .portrait-img{
+  height:270px;
+}
+
+.slide:nth-child(16) blockquote{
+  margin:11px 0;
+}
+
+/* Экран: страница остается настоящим A4-листом */
+@media screen and (max-width:900px){
   body{
-    font-family:"Fraunces","Georgia",serif;
-    background:#0a0303;
-    color:var(--bone);
-    -webkit-font-smoothing:antialiased;
-    padding:56px 20px 100px;
-    min-height:100vh;
-    font-feature-settings:"lnum","kern","liga","ss01";
+    padding:12px 0 35px;
+    overflow-x:auto;
   }
 
   .deck{
-    max-width:1180px;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    gap:36px;
+    gap:14px;
+    transform-origin:top center;
+  }
+}
+
+/* Телефон: уменьшаем именно визуальный масштаб, но сохраняем пропорции A4 */
+@media screen and (max-width:700px){
+  body{
+    padding:8px 0 20px;
+  }
+
+  .deck{
+    width:100%;
+    align-items:center;
   }
 
   .slide{
-    position:relative;
-    background:var(--velvet);
-    padding:60px 76px 88px;
-    min-height:720px;
-    isolation:isolate;
-    overflow:hidden;
-    box-shadow:
-      0 40px 100px -20px rgba(0,0,0,.9),
-      0 0 0 1px rgba(201,169,97,.15);
-  }
-
-  .slide::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      repeating-linear-gradient(
-        90deg,
-        rgba(0,0,0,.35) 0px,
-        rgba(0,0,0,0) 30px,
-        rgba(255,255,255,.025) 60px,
-        rgba(0,0,0,0) 90px,
-        rgba(0,0,0,.35) 120px
-      );
-    pointer-events:none;
-    z-index:0;
-    opacity:.7;
-  }
-
-  .slide::after{
-    content:"";
-    position:absolute;
-    top:-320px;
-    left:50%;
-    transform:translateX(-50%);
-    width:1200px;
-    height:600px;
-    background:
-      radial-gradient(ellipse at 50% 100%,
-        rgba(224,200,138,.16) 0%,
-        rgba(224,200,138,.06) 25%,
-        transparent 55%);
-    pointer-events:none;
-    z-index:0;
+    width:min(100vw,210mm);
+    height:auto;
+    min-height:0;
+    aspect-ratio:210 / 297;
+    flex:0 0 auto;
+    padding:6.5vw 5.2vw 7vw;
   }
 
   .frame{
-    position:absolute;
-    inset:16px;
-    border:1px solid var(--line);
-    pointer-events:none;
-    z-index:2;
-  }
-  .frame::before,
-  .frame::after{
-    content:"";
-    position:absolute;
-    width:22px;height:22px;
-    border:1px solid var(--gold);
-  }
-  .frame::before{
-    top:-1px;left:-1px;
-    border-right:none;
-    border-bottom:none;
-  }
-  .frame::after{
-    bottom:-1px;right:-1px;
-    border-left:none;
-    border-top:none;
+    inset:2.4vw;
   }
 
-  /* ═══════ CHROME ═══════ */
   .chrome{
-    position:relative;
-    z-index:3;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-bottom:20px;
-    font-family:"Jost",sans-serif;
-    font-size:10.5px;
-    letter-spacing:3.5px;
-    text-transform:uppercase;
-    color:var(--bone-2);
-    font-weight:400;
-    border-bottom:1px solid var(--line-2);
-    margin-bottom:36px;
-  }
-  .chrome-mark,
-  .chrome-folio{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .chrome-mark::before{
-    content:"";
-    width:6px;height:6px;
-    background:var(--gold);
-    transform:rotate(45deg);
-    box-shadow:0 0 12px rgba(201,169,97,.6);
-  }
-  .chrome-folio b{
-    font-family:"Fraunces",serif;
-    font-weight:400;
-    font-style:italic;
-    font-size:16px;
-    color:var(--gold-2);
-    letter-spacing:0;
-    text-transform:none;
-  }
-  .chrome-folio .sep{
-    color:var(--gold-3);
-    margin:0 3px;
+    font-size:7px;
+    letter-spacing:2px;
+    margin-bottom:3.5vw;
   }
 
-  /* ═══════ TYPOGRAPHY ═══════ */
-  h1{
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-size:clamp(56px, 8.4vw, 118px);
-    line-height:.94;
-    letter-spacing:-.03em;
-    color:var(--bone);
-    margin-bottom:32px;
-    font-variation-settings:"opsz" 144, "SOFT" 50, "WONK" 0;
+  h1{font-size:8.2vw;}
+  h2{font-size:5.2vw;}
+  h2 .kicker{font-size:1.25vw;}
+  p,li{font-size:1.9vw;line-height:1.48;}
+  .two-col{gap:4vw;}
+  .portrait-img{height:32vw;}
+  .landscape-img{max-height:42vw;}
+  .stat .n{font-size:7vw;}
+  .big-num{font-size:44vw;}
+  .stage-footer{font-size:1.4vw;}
+}
+
+/* =========================================================
+   PDF / ПЕЧАТЬ
+   Ключевой блок: каждый .slide печатается ровно на одном A4.
+   ========================================================= */
+@page{
+  size:A4 portrait;
+  margin:0;
+}
+
+@media print{
+  html,body{
+    width:210mm;
+    min-width:210mm;
+    margin:0 !important;
+    padding:0 !important;
+    background:var(--velvet) !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
   }
-  h1 .kicker{
+
+  body{
+    overflow:visible !important;
+  }
+
+  .deck{
+    width:210mm;
+    margin:0;
+    padding:0;
     display:block;
-    font-family:"Italiana",serif;
-    font-size:.19em;
-    letter-spacing:.55em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:36px;
-    font-weight:400;
-  }
-  h1 em{
-    font-style:italic;
-    font-weight:300;
-    color:var(--gold-2);
-    text-shadow:0 0 40px rgba(224,200,138,.25);
   }
 
-  h2{
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-size:clamp(34px, 4.4vw, 60px);
-    line-height:1.02;
-    letter-spacing:-.025em;
-    color:var(--bone);
-    margin-bottom:34px;
-    max-width:24ch;
-    font-variation-settings:"opsz" 144, "SOFT" 40, "WONK" 1;
-  }
-  h2 em{
-    font-style:italic;
-    font-weight:300;
-    color:var(--gold-2);
-  }
-  h2 .kicker{
-    display:block;
-    font-family:"Jost",sans-serif;
-    font-size:10.5px;
-    font-weight:500;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:18px;
-  }
-
-  h3{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    font-family:"Jost",sans-serif;
-    font-size:10.5px;
-    font-weight:500;
-    letter-spacing:3.5px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin:30px 0 14px;
-  }
-  h3::before{
-    content:"";
-    width:5px;height:5px;
-    background:var(--gold);
-    transform:rotate(45deg);
-    flex-shrink:0;
-  }
-  h3::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:linear-gradient(90deg,var(--line),transparent);
-  }
-
-  p,li{
-    font-family:"Fraunces",serif;
-    font-size:18px;
-    line-height:1.68;
-    color:var(--bone-2);
-    margin-bottom:14px;
-    font-weight:300;
-    letter-spacing:.002em;
-    max-width:62ch;
-    font-variation-settings:"opsz" 14, "SOFT" 40;
-  }
-  p strong,p b,li strong,li b{
-    color:var(--bone);
-    font-weight:500;
-    font-style:italic;
-  }
-  p em{
-    color:var(--gold-2);
-    font-style:italic;
-    font-weight:400;
-  }
-
-  .dropcap::first-letter{
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:5.4em;
-    line-height:.82;
-    float:left;
-    padding:8px 18px 0 0;
-    color:var(--gold-2);
-    text-shadow:0 0 30px rgba(224,200,138,.3);
-  }
-
-  ul{padding-left:0;list-style:none;margin-bottom:16px;}
-  ul li{
-    padding-left:34px;
-    position:relative;
-    margin-bottom:10px;
-  }
-  ul li::before{
-    content:"";
-    position:absolute;
-    left:8px;top:14px;
-    width:6px;height:6px;
-    background:var(--gold);
-    transform:rotate(45deg);
-  }
-  ul li:nth-child(even)::before{
-    background:var(--gold-3);
-  }
-
-  ul.numbered{counter-reset:n;}
-  ul.numbered li{
-    counter-increment:n;
-    padding-left:84px;
-    margin-bottom:18px;
-  }
-  ul.numbered li::before{
-    content:counter(n,upper-roman);
-    width:auto;height:auto;
-    top:-4px;left:0;
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:38px;
-    line-height:1;
-    letter-spacing:-.02em;
-    color:var(--gold-2);
-    background:none;
-    transform:none;
-    text-shadow:0 0 20px rgba(224,200,138,.2);
-  }
-
-  /* ═══════ LAYOUTS ═══════ */
-  .two-col{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:56px;
-    align-items:start;
-  }
-  .two-col.wide-left{grid-template-columns:1.15fr .85fr;}
-  .two-col.narrow-left{grid-template-columns:.85fr 1.15fr;}
-
-  /* ═══════ IMAGE FRAME ═══════ */
-  .img-frame{
-    position:relative;
-    padding:12px;
-    background:linear-gradient(180deg,rgba(201,169,97,.06),rgba(201,169,97,.02));
-    border:1px solid var(--line);
-    box-shadow:
-      inset 0 0 40px rgba(201,169,97,.05),
-      0 20px 40px -20px rgba(0,0,0,.8);
-    overflow:visible;
-    display:block;
-    width:100%;
-    max-width:100%;
-  }
-  .img-frame::before,
-  .img-frame::after{
-    content:"";
-    position:absolute;
-    width:7px;height:7px;
-    background:var(--gold);
-    transform:rotate(45deg);
-    z-index:3;
-    box-shadow:0 0 12px rgba(201,169,97,.7);
-  }
-  .img-frame::before{
-    top:-4px;left:-4px;
-  }
-  .img-frame::after{
-    bottom:-4px;right:-4px;
-  }
-
-  .img-frame.hug{
-    display:inline-block;
-    width:auto;
-  }
-  .img-frame.hug .landscape-img{
-    width:auto;
-    max-width:100%;
-    height:auto;
-  }
-
-  /* ═══ PORTRAIT — голова полностью в кадре, без обрезки ═══ */
-  .portrait-img{
-    display:block;
-    width:100%;
-    height:460px;
-    object-fit:cover;
-    object-position:center 15%;
-    background:#0f0303;
-    position:relative;
-    z-index:1;
-    border-radius:2px;
-    -webkit-user-select:none;
-    user-select:none;
-  }
-
-  .landscape-img{
-    display:block;
-    width:100%;
-    height:auto;
-    object-fit:cover;
-    background:#0f0303;
-    position:relative;
-    z-index:1;
-    border-radius:2px;
-  }
-
-  .img-ph{
-    position:relative;
-    background:
-      repeating-linear-gradient(
-        -45deg,
-        rgba(201,169,97,.05) 0 1px,
-        transparent 1px 14px),
-      linear-gradient(180deg, rgba(58,11,16,.7) 0%, rgba(23,5,6,.9) 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:var(--bone-2);
-    font-family:"Jost",sans-serif;
-    font-size:10px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    padding:24px;
-    min-height:280px;
-    line-height:1.7;
-    font-weight:400;
-    border-radius:2px;
-  }
-  .img-ph::before{
-    content:"";
-    position:absolute;
-    inset:8px;
-    border:1px solid rgba(201,169,97,.25);
-    pointer-events:none;
-  }
-  .img-ph span{
-    position:relative;
-    z-index:1;
-    padding:6px 14px;
-    background:rgba(23,5,6,.6);
-    border:1px solid rgba(201,169,97,.35);
-    backdrop-filter:blur(4px);
-    -webkit-backdrop-filter:blur(4px);
-  }
-  .img-ph.tall{min-height:420px;}
-  .img-ph.wide{min-height:240px;}
-
-  .caption{
-    font-family:"Jost",sans-serif;
-    font-size:10px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-top:24px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:400;
-  }
-  .caption::before{
-    content:"";
-    width:24px;height:1px;
-    background:var(--gold-3);
-  }
-
-  /* ═══════ STAT ═══════ */
-  .stat{
-    padding:22px 0;
-    border-top:1px solid var(--line-2);
-    display:flex;
-    align-items:baseline;
-    gap:22px;
-  }
-  .stat:last-child{border-bottom:1px solid var(--line-2);}
-  .stat .n{
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:76px;
-    line-height:.85;
-    letter-spacing:-.03em;
-    color:var(--gold-2);
-    text-shadow:0 0 32px rgba(224,200,138,.25);
-    font-variation-settings:"opsz" 144, "SOFT" 50;
-  }
-  .stat .lbl{
-    font-family:"Jost",sans-serif;
-    font-size:10.5px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--muted);
-    max-width:22ch;
-    line-height:1.7;
-    font-weight:400;
-  }
-
-  /* ═══════ TABLE ═══════ */
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:17px;
-    border-top:1px solid var(--gold);
-    border-bottom:1px solid var(--gold);
-  }
-  th,td{
-    padding:20px 22px;
-    text-align:left;
-    vertical-align:top;
-    color:var(--bone-2);
-    border-bottom:1px solid var(--line-2);
-    line-height:1.6;
-    font-weight:300;
-    font-family:"Fraunces",serif;
-  }
-  th{
-    background:transparent;
-    font-family:"Jost",sans-serif;
-    font-size:10px;
-    letter-spacing:3.5px;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight:500;
-    border-bottom:1px solid var(--gold);
-  }
-  tr:last-child td{border-bottom:none;}
-  td:first-child{
-    font-family:"Fraunces",serif;
-    font-style:italic;
-    font-weight:300;
-    color:var(--gold-2);
-    font-size:20px;
-    width:32%;
-    font-variation-settings:"opsz" 144, "SOFT" 50;
-  }
-
-  /* ═══════ QUOTE ═══════ */
-  blockquote{
-    position:relative;
-    padding:6px 0 6px 52px;
-    margin:24px 0;
-    font-family:"Fraunces",serif;
-    font-style:italic;
-    font-weight:300;
-    font-size:21px;
-    line-height:1.5;
-    color:var(--bone);
-    letter-spacing:-.005em;
-    font-variation-settings:"opsz" 144, "SOFT" 60;
-  }
-  blockquote::before{
-    content:"“";
-    position:absolute;
-    left:0;top:-22px;
-    font-family:"Fraunces",serif;
-    font-style:normal;
-    font-weight:300;
-    font-size:96px;
-    line-height:1;
-    color:var(--gold);
-    text-shadow:0 0 30px rgba(201,169,97,.4);
-  }
-  blockquote p{font:inherit;color:inherit;margin:0;max-width:none;}
-  .quote-author{
-    display:block;
-    font-family:"Jost",sans-serif;
-    font-style:normal;
-    font-size:10px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-top:16px;
-    font-weight:500;
-  }
-  .quote-author::before{
-    content:"—— ";
-    color:var(--gold);
-  }
-
-  /* ═══════ ORNAMENT ═══════ */
-  .ornament{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    margin:28px 0;
-    color:var(--gold);
-  }
-  .ornament::before,
-  .ornament::after{
-    content:"";
-    height:1px;
-    background:linear-gradient(90deg,transparent,var(--gold-3),transparent);
-    flex:1;
-    max-width:180px;
-  }
-  .ornament i{
-    display:block;
-    width:6px;height:6px;
-    background:var(--gold);
-    transform:rotate(45deg);
-    box-shadow:0 0 12px rgba(201,169,97,.5);
-  }
-  .ornament i:nth-child(2){
-    width:9px;height:9px;
-    background:var(--gold-2);
-  }
-
-  .big-num{
-    position:absolute;
-    right:-20px;
-    bottom:-100px;
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:420px;
-    line-height:.82;
-    letter-spacing:-.05em;
-    color:transparent;
-    -webkit-text-stroke:1px rgba(201,169,97,.14);
-    pointer-events:none;
-    z-index:1;
-    user-select:none;
-    font-variation-settings:"opsz" 144, "SOFT" 50;
-  }
-
-  .title-slide{
-    padding:56px 76px 96px;
-    min-height:860px;
-  }
-  .title-slide .chrome{
-    border-bottom:1px solid var(--line);
-    margin-bottom:48px;
-  }
-  .title-slide h1{
-    text-align:center;
-    max-width:900px;
-    margin:0 auto 32px;
-  }
-  .title-slide .lead{
-    font-family:"Fraunces",serif;
-    font-style:italic;
-    font-weight:300;
-    font-size:23px;
-    line-height:1.5;
-    color:var(--bone-2);
-    max-width:680px;
-    margin:0 auto 64px;
-    text-align:center;
-    letter-spacing:-.005em;
-  }
-  .title-slide .lead em{
-    color:var(--gold-2);
-    font-weight:400;
-  }
-
-  .portraits{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:44px;
-    margin-top:16px;
-    position:relative;
-    z-index:2;
-  }
-  .portrait .meta{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:16px;
-    margin-top:26px;
-    padding-top:18px;
-    border-top:1px solid var(--line);
-  }
-  .portrait .name{
-    font-family:"Fraunces",serif;
-    font-weight:300;
-    font-size:24px;
-    line-height:1.12;
-    letter-spacing:-.015em;
-    color:var(--bone);
-    font-variation-settings:"opsz" 144, "SOFT" 50;
-  }
-  .portrait .role{
-    font-family:"Jost",sans-serif;
-    font-size:10px;
-    letter-spacing:2.5px;
-    text-transform:uppercase;
-    color:var(--muted);
-    text-align:right;
-    flex-shrink:0;
-    line-height:1.8;
-    padding-top:8px;
-    font-weight:400;
-  }
-
-  .bulbs{
-    display:flex;
-    gap:14px;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:32px;
-    position:relative;
-    z-index:3;
-  }
-  .bulbs i{
-    display:block;
-    width:4px;height:4px;
-    border-radius:50%;
-    background:var(--gold);
-    box-shadow:
-      0 0 6px rgba(224,200,138,.7),
-      0 0 14px rgba(224,200,138,.35);
-  }
-  .bulbs i:nth-child(3n+2){
-    background:var(--gold-3);
+  .slide{
+    width:210mm;
+    height:297mm;
+    min-height:297mm;
+    max-height:297mm;
+    margin:0 !important;
+    padding:var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
     box-shadow:none;
+    overflow:hidden;
+
+    break-after:page !important;
+    page-break-after:always !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
   }
 
-  .stage-footer{
-    position:absolute;
-    left:0;right:0;
-    bottom:26px;
-    text-align:center;
-    font-family:"Italiana",serif;
-    font-size:11px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    color:var(--muted);
-    z-index:3;
-  }
-  .stage-footer .diamond{
-    color:var(--gold);
-    margin:0 14px;
-    text-shadow:0 0 12px rgba(201,169,97,.5);
+  .slide:last-child{
+    break-after:auto !important;
+    page-break-after:auto !important;
   }
 
-  @media (max-width:860px){
-    body{padding:24px 8px 60px;}
-    .slide{padding:44px 28px 84px;}
-    .title-slide{padding:44px 28px 84px;}
-    .two-col,.portraits{grid-template-columns:1fr;gap:36px;}
-    h1{font-size:clamp(40px,10vw,64px);}
-    h2{font-size:clamp(28px,7vw,44px);max-width:none;}
-    p,li{font-size:16px;}
-    .stat .n{font-size:54px;}
-    blockquote{font-size:18px;padding-left:36px;}
-    blockquote::before{font-size:64px;top:-14px;}
-    ul.numbered li{padding-left:60px;}
-    ul.numbered li::before{font-size:28px;}
-    td:first-child{font-size:17px;width:auto;}
-    .big-num{font-size:220px;bottom:-50px;}
-    .frame{inset:10px;}
-    .portrait-img{height:400px;}
+  /* Не позволяем браузеру самостоятельно ужимать страницу */
+  .slide,
+  .slide *{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
   }
+
+  /* Убираем интерактивно-сетевые эффекты, которые иногда дают артефакты PDF */
+  .img-ph span{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+}
+
+/* Если шрифты Google недоступны, PDF все равно остается корректным:
+   запасные шрифты уже указаны в каждом текстовом блоке. */
 </style>
 </head>
+
 <body>
 <div class="deck">
 
@@ -772,7 +1021,7 @@
         <div class="portrait">
           <div class="img-frame">
             <img class="portrait-img"
-                 src="https://i.ibb.co/B28ZG7s8/image.png"
+                 src="https://i.ibb.co/TMXzxc6C/diting-result-7a17232ab5cc11f1b6126e38d5d6593c-1.png"
                  alt="Константин Станиславский">
           </div>
           <div class="meta">
@@ -785,7 +1034,7 @@
         <div class="portrait">
           <div class="img-frame">
             <img class="portrait-img"
-                 src="https://i.ibb.co/3xmjW2T/image.png"
+                 src="https://i.ibb.co/LXHmYZHS/diting-result-4d900885b5cd11f1b46862569497eb2e-1.png"
                  alt="Владимир Немирович-Данченко">
           </div>
           <div class="meta">
@@ -835,7 +1084,7 @@
       <div>
         <div class="img-frame">
           <img class="portrait-img"
-               src="https://i.ibb.co/3y9Nf005/2026-09-21-15-04-42.png"
+               src="https://i.ibb.co/Z49fC13/diting-result-e2459133b5d711f184705e732f650a98-1.png" style="object-fit:contain;object-position:center;"
                alt="Станиславский портрет">
         </div>
         <div class="caption">Константин Сергеевич Алексеев</div>
@@ -878,7 +1127,7 @@
       <div>
         <div class="img-frame">
           <img class="portrait-img"
-               src="https://i.ibb.co/B5K5TYs1/2026-09-21-15-05-49.png"
+               src="https://i.ibb.co/GKCFhWH/diting-result-d351b456b5cc11f199ae023bb474c8fd-1.png" style="object-fit:contain;object-position:center;"
                alt="Немирович-Данченко портрет">
         </div>
         <div class="caption">Владимир Иванович</div>
@@ -906,7 +1155,7 @@
       <div style="text-align:center;">
         <div class="img-frame hug" style="margin-bottom:40px;">
           <img class="landscape-img"
-               src="https://i.ibb.co/6cK0nck4/2026-09-21-15-08-22.png"
+               src="https://i.ibb.co/xt4s5k91/diting-result-5a4a54d7b5e611f1b41b8269b756e6a2-1.png"
                alt="Станиславский и Немирович-Данченко вместе">
         </div>
       </div>
@@ -987,7 +1236,7 @@
       <div>
         <div class="img-frame">
           <img class="landscape-img"
-               src="https://i.ibb.co/pv9xVzNN/2026-09-21-15-08-56.png"
+               src="https://i.ibb.co/cXDgFHGJ/diting-result-c057856db5cd11f18e063e016d706d26-1.png"
                alt="Чехов, Немирович-Данченко и актриса">
         </div>
         <div class="caption">Творческий союз · 1900-е</div>
@@ -1052,7 +1301,7 @@
         <div>
           <div class="img-frame">
             <img class="landscape-img"
-                 src="https://i.ibb.co/cS2MsLZv/2026-09-21-15-10-39.png"
+                 src="https://i.ibb.co/tpKZg74t/diting-result-0ba8639fb5dd11f1b8ffda72208dc2af-1.png"
                  alt="Актёр с черепом · Гамлет">
           </div>
           <div class="caption">Сцена как лаборатория</div>
@@ -1102,7 +1351,7 @@
       <div style="text-align:center;">
         <div class="img-frame hug" style="margin-top:36px;">
           <img class="landscape-img"
-               src="https://i.ibb.co/4gmSPnK4/2026-09-21-15-11-26.png"
+               src="https://i.ibb.co/KxrdsSM1/2026-09-21-19-34-52.png"
                alt="Репетиция МХТ">
         </div>
       </div>
@@ -1135,7 +1384,7 @@
       <div>
         <div class="img-frame">
           <img class="portrait-img"
-               src="https://i.ibb.co/R4ydFjVW/2026-09-21-15-12-08.png"
+               src="https://i.ibb.co/Fk1TKj9M/diting-result-28f13af8b5d911f1bffd02b78b65d167-1.png" style="object-fit:contain;object-position:center;"
                alt="М. О. Кнебель">
         </div>
         <div class="caption">«О действенном анализе пьесы и роли»</div>
@@ -1211,13 +1460,17 @@
       <div class="two-col" style="margin-bottom:36px;">
         <div>
           <div class="img-frame">
-            <div class="img-ph tall"><span>Фото · А. П. Чехов</span></div>
+            <img class="portrait-img"
+                 src="https://i.ibb.co/gLXRR1ts/diting-result-9c70ad54b5d911f198ceb63a0c537e8b-1.png" style="object-fit:contain;object-position:center;"
+                 alt="Антон Павлович Чехов">
           </div>
           <div class="caption">Антон Павлович Чехов</div>
         </div>
         <div>
           <div class="img-frame">
-            <div class="img-ph tall"><span>Фото · Занавес МХТ · силуэт чайки</span></div>
+            <img class="portrait-img"
+                 src="https://i.ibb.co/35YGrkhq/diting-result-af8277ffb5da11f1a8f17e89803eed1c-1.png" style="object-fit:contain;object-position:center;"
+                 alt="Эмблема театра · 1898">
           </div>
           <div class="caption">Эмблема театра · 1898</div>
         </div>
@@ -1271,7 +1524,7 @@
       <div style="text-align:center;">
         <div class="img-frame hug" style="margin-top:36px;">
           <img class="landscape-img"
-               src="https://i.ibb.co/d8pcCyx/2026-09-21-15-13-11.png"
+               src="https://i.ibb.co/JjtRYfqL/diting-result-97eb9e90b5da11f1a5ddb24437b636e2-1.png"
                alt="Памятник Станиславскому и Немировичу-Данченко">
         </div>
       </div>
@@ -1301,7 +1554,7 @@
         <div>
           <div class="img-frame" style="margin-bottom:18px;">
             <img class="portrait-img"
-                 src="https://i.ibb.co/MYcLGfc/2026-09-21-15-13-55.png"
+                 src="https://i.ibb.co/7tzqKVYn/2026-09-21-19-32-32.png" style="object-fit:contain;object-position:center;"
                  alt="Константин Хабенский">
           </div>
           <div class="caption" style="margin-top:0;margin-bottom:22px;">МХТ им. А. П. Чехова · Камергерский переулок</div>
@@ -1310,7 +1563,7 @@
         <div>
           <div class="img-frame" style="margin-bottom:18px;">
             <img class="portrait-img"
-                 src="https://i.ibb.co/hRJW6DSc/image.png"
+                 src="https://i.ibb.co/DHqYw3Ws/2026-09-21-19-33-44.png" style="object-fit:contain;object-position:center;"
                  alt="Сергей Безруков">
           </div>
           <div class="caption" style="margin-top:0;margin-bottom:22px;">МХАТ им. М. Горького · Тверской бульвар</div>
@@ -1348,7 +1601,7 @@
       <div>
         <div class="img-frame">
           <img class="landscape-img"
-               src="https://i.ibb.co/9388g2gt/2026-09-21-15-15-15.png"
+               src="https://i.ibb.co/C3W3p9hZ/diting-result-f562ef2bb5d911f1b217d2a7310ecb68-1.png"
                alt="Сцена из спектакля Три сестры">
         </div>
         <div class="caption">МХАТ · 1940</div>
@@ -1377,7 +1630,7 @@
         <div>
           <div class="img-frame">
             <img class="portrait-img"
-                 src="https://i.ibb.co/Q3M4qFgy/2026-09-21-16-01.png"
+                 src="https://i.ibb.co/63cfMPC/diting-result-de0cefe4b5da11f1bffd02b78b65d167-1.png" style="object-fit:contain;object-position:center;"
                  alt="Афиша радиоспектакль Три сестры">
           </div>
           <div class="caption">Запись 1947 года</div>
