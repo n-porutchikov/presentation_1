@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Люди, которые изменили театр</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Italiana&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --velvet:#170506;
+    --velvet-2:#240808;
+    --wine:#3a0b10;
+    --wine-2:#5a1220;
+    --gold:#c9a961;
+    --gold-2:#e0c88a;
+    --gold-3:#8b7440;
+    --bone:#f0e6d2;
+    --bone-2:#c9bda6;
+    --muted:#8a7a6a;
+    --muted-2:#5a4d42;
+    --line:rgba(201,169,97,.28);
+    --line-2:rgba(201,169,97,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Fraunces","Georgia",serif;
+    background:#0a0303;
+    color:var(--bone);
+    -webkit-font-smoothing:antialiased;
+    padding:56px 20px 100px;
+    min-height:100vh;
+    font-feature-settings:"lnum","kern","liga","ss01";
+  }
+
+  .deck{
+    max-width:1180px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+
+  .slide{
+    position:relative;
+    background:var(--velvet);
+    padding:60px 76px 88px;
+    min-height:720px;
+    isolation:isolate;
+    overflow:hidden;
+    box-shadow:
+      0 40px 100px -20px rgba(0,0,0,.9),
+      0 0 0 1px rgba(201,169,97,.15);
+  }
+
+  .slide::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(0,0,0,.35) 0px,
+        rgba(0,0,0,0) 30px,
+        rgba(255,255,255,.025) 60px,
+        rgba(0,0,0,0) 90px,
+        rgba(0,0,0,.35) 120px
+      );
+    pointer-events:none;
+    z-index:0;
+    opacity:.7;
+  }
+
+  .slide::after{
+    content:"";
+    position:absolute;
+    top:-320px;
+    left:50%;
+    transform:translateX(-50%);
+    width:1200px;
+    height:600px;
+    background:
+      radial-gradient(ellipse at 50% 100%,
+        rgba(224,200,138,.16) 0%,
+        rgba(224,200,138,.06) 25%,
+        transparent 55%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .frame{
+    position:absolute;
+    inset:16px;
+    border:1px solid var(--line);
+    pointer-events:none;
+    z-index:2;
+  }
+  .frame::before,
+  .frame::after{
+    content:"";
+    position:absolute;
+    width:22px;height:22px;
+    border:1px solid var(--gold);
+  }
+  .frame::before{
+    top:-1px;left:-1px;
+    border-right:none;
+    border-bottom:none;
+  }
+  .frame::after{
+    bottom:-1px;right:-1px;
+    border-left:none;
+    border-top:none;
+  }
+
+  /* ═══════ CHROME ═══════ */
+  .chrome{
+    position:relative;
+    z-index:3;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:20px;
+    font-family:"Jost",sans-serif;
+    font-size:10.5px;
+    letter-spacing:3.5px;
+    text-transform:uppercase;
+    color:var(--bone-2);
+    font-weight:400;
+    border-bottom:1px solid var(--line-2);
+    margin-bottom:36px;
+  }
+  .chrome-mark,
+  .chrome-folio{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .chrome-mark::before{
+    content:"";
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    box-shadow:0 0 12px rgba(201,169,97,.6);
+  }
+  .chrome-folio b{
+    font-family:"Fraunces",serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:16px;
+    color:var(--gold-2);
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .chrome-folio .sep{
+    color:var(--gold-3);
+    margin:0 3px;
+  }
+
+  /* ═══════ TYPOGRAPHY ═══════ */
+  h1{
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-size:clamp(56px, 8.4vw, 118px);
+    line-height:.94;
+    letter-spacing:-.03em;
+    color:var(--bone);
+    margin-bottom:32px;
+    font-variation-settings:"opsz" 144, "SOFT" 50, "WONK" 0;
+  }
+  h1 .kicker{
+    display:block;
+    font-family:"Italiana",serif;
+    font-size:.19em;
+    letter-spacing:.55em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:36px;
+    font-weight:400;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-2);
+    text-shadow:0 0 40px rgba(224,200,138,.25);
+  }
+
+  h2{
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-size:clamp(34px, 4.4vw, 60px);
+    line-height:1.02;
+    letter-spacing:-.025em;
+    color:var(--bone);
+    margin-bottom:34px;
+    max-width:24ch;
+    font-variation-settings:"opsz" 144, "SOFT" 40, "WONK" 1;
+  }
+  h2 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-2);
+  }
+  h2 .kicker{
+    display:block;
+    font-family:"Jost",sans-serif;
+    font-size:10.5px;
+    font-weight:500;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+
+  h3{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:"Jost",sans-serif;
+    font-size:10.5px;
+    font-weight:500;
+    letter-spacing:3.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:30px 0 14px;
+  }
+  h3::before{
+    content:"";
+    width:5px;height:5px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    flex-shrink:0;
+  }
+  h3::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,var(--line),transparent);
+  }
+
+  p,li{
+    font-family:"Fraunces",serif;
+    font-size:18px;
+    line-height:1.68;
+    color:var(--bone-2);
+    margin-bottom:14px;
+    font-weight:300;
+    letter-spacing:.002em;
+    max-width:62ch;
+    font-variation-settings:"opsz" 14, "SOFT" 40;
+  }
+  p strong,p b,li strong,li b{
+    color:var(--bone);
+    font-weight:500;
+    font-style:italic;
+  }
+  p em{
+    color:var(--gold-2);
+    font-style:italic;
+    font-weight:400;
+  }
+
+  .dropcap::first-letter{
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:5.4em;
+    line-height:.82;
+    float:left;
+    padding:8px 18px 0 0;
+    color:var(--gold-2);
+    text-shadow:0 0 30px rgba(224,200,138,.3);
+  }
+
+  ul{padding-left:0;list-style:none;margin-bottom:16px;}
+  ul li{
+    padding-left:34px;
+    position:relative;
+    margin-bottom:10px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:8px;top:14px;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ul li:nth-child(even)::before{
+    background:var(--gold-3);
+  }
+
+  ul.numbered{counter-reset:n;}
+  ul.numbered li{
+    counter-increment:n;
+    padding-left:84px;
+    margin-bottom:18px;
+  }
+  ul.numbered li::before{
+    content:counter(n,upper-roman);
+    width:auto;height:auto;
+    top:-4px;left:0;
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:38px;
+    line-height:1;
+    letter-spacing:-.02em;
+    color:var(--gold-2);
+    background:none;
+    transform:none;
+    text-shadow:0 0 20px rgba(224,200,138,.2);
+  }
+
+  /* ═══════ LAYOUTS ═══════ */
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .two-col.wide-left{grid-template-columns:1.15fr .85fr;}
+  .two-col.narrow-left{grid-template-columns:.85fr 1.15fr;}
+
+  /* ═══════ IMAGE FRAME ═══════ */
+  .img-frame{
+    position:relative;
+    padding:12px;
+    background:linear-gradient(180deg,rgba(201,169,97,.06),rgba(201,169,97,.02));
+    border:1px solid var(--line);
+    box-shadow:
+      inset 0 0 40px rgba(201,169,97,.05),
+      0 20px 40px -20px rgba(0,0,0,.8);
+    overflow:visible;
+    display:block;
+    width:100%;
+    max-width:100%;
+  }
+  .img-frame::before,
+  .img-frame::after{
+    content:"";
+    position:absolute;
+    width:7px;height:7px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    z-index:3;
+    box-shadow:0 0 12px rgba(201,169,97,.7);
+  }
+  .img-frame::before{
+    top:-4px;left:-4px;
+  }
+  .img-frame::after{
+    bottom:-4px;right:-4px;
+  }
+
+  .img-frame.hug{
+    display:inline-block;
+    width:auto;
+  }
+  .img-frame.hug .landscape-img{
+    width:auto;
+    max-width:100%;
+    height:auto;
+  }
+
+  /* ═══ PORTRAIT — голова полностью в кадре, без обрезки ═══ */
+  .portrait-img{
+    display:block;
+    width:100%;
+    height:460px;
+    object-fit:cover;
+    object-position:center 15%;
+    background:#0f0303;
+    position:relative;
+    z-index:1;
+    border-radius:2px;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+
+  .landscape-img{
+    display:block;
+    width:100%;
+    height:auto;
+    object-fit:cover;
+    background:#0f0303;
+    position:relative;
+    z-index:1;
+    border-radius:2px;
+  }
+
+  .img-ph{
+    position:relative;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        rgba(201,169,97,.05) 0 1px,
+        transparent 1px 14px),
+      linear-gradient(180deg, rgba(58,11,16,.7) 0%, rgba(23,5,6,.9) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:var(--bone-2);
+    font-family:"Jost",sans-serif;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    padding:24px;
+    min-height:280px;
+    line-height:1.7;
+    font-weight:400;
+    border-radius:2px;
+  }
+  .img-ph::before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border:1px solid rgba(201,169,97,.25);
+    pointer-events:none;
+  }
+  .img-ph span{
+    position:relative;
+    z-index:1;
+    padding:6px 14px;
+    background:rgba(23,5,6,.6);
+    border:1px solid rgba(201,169,97,.35);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+  }
+  .img-ph.tall{min-height:420px;}
+  .img-ph.wide{min-height:240px;}
+
+  .caption{
+    font-family:"Jost",sans-serif;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:400;
+  }
+  .caption::before{
+    content:"";
+    width:24px;height:1px;
+    background:var(--gold-3);
+  }
+
+  /* ═══════ STAT ═══════ */
+  .stat{
+    padding:22px 0;
+    border-top:1px solid var(--line-2);
+    display:flex;
+    align-items:baseline;
+    gap:22px;
+  }
+  .stat:last-child{border-bottom:1px solid var(--line-2);}
+  .stat .n{
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:76px;
+    line-height:.85;
+    letter-spacing:-.03em;
+    color:var(--gold-2);
+    text-shadow:0 0 32px rgba(224,200,138,.25);
+    font-variation-settings:"opsz" 144, "SOFT" 50;
+  }
+  .stat .lbl{
+    font-family:"Jost",sans-serif;
+    font-size:10.5px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--muted);
+    max-width:22ch;
+    line-height:1.7;
+    font-weight:400;
+  }
+
+  /* ═══════ TABLE ═══════ */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:17px;
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+  }
+  th,td{
+    padding:20px 22px;
+    text-align:left;
+    vertical-align:top;
+    color:var(--bone-2);
+    border-bottom:1px solid var(--line-2);
+    line-height:1.6;
+    font-weight:300;
+    font-family:"Fraunces",serif;
+  }
+  th{
+    background:transparent;
+    font-family:"Jost",sans-serif;
+    font-size:10px;
+    letter-spacing:3.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    border-bottom:1px solid var(--gold);
+  }
+  tr:last-child td{border-bottom:none;}
+  td:first-child{
+    font-family:"Fraunces",serif;
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-2);
+    font-size:20px;
+    width:32%;
+    font-variation-settings:"opsz" 144, "SOFT" 50;
+  }
+
+  /* ═══════ QUOTE ═══════ */
+  blockquote{
+    position:relative;
+    padding:6px 0 6px 52px;
+    margin:24px 0;
+    font-family:"Fraunces",serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:21px;
+    line-height:1.5;
+    color:var(--bone);
+    letter-spacing:-.005em;
+    font-variation-settings:"opsz" 144, "SOFT" 60;
+  }
+  blockquote::before{
+    content:"“";
+    position:absolute;
+    left:0;top:-22px;
+    font-family:"Fraunces",serif;
+    font-style:normal;
+    font-weight:300;
+    font-size:96px;
+    line-height:1;
+    color:var(--gold);
+    text-shadow:0 0 30px rgba(201,169,97,.4);
+  }
+  blockquote p{font:inherit;color:inherit;margin:0;max-width:none;}
+  .quote-author{
+    display:block;
+    font-family:"Jost",sans-serif;
+    font-style:normal;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:16px;
+    font-weight:500;
+  }
+  .quote-author::before{
+    content:"—— ";
+    color:var(--gold);
+  }
+
+  /* ═══════ ORNAMENT ═══════ */
+  .ornament{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:28px 0;
+    color:var(--gold);
+  }
+  .ornament::before,
+  .ornament::after{
+    content:"";
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold-3),transparent);
+    flex:1;
+    max-width:180px;
+  }
+  .ornament i{
+    display:block;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    box-shadow:0 0 12px rgba(201,169,97,.5);
+  }
+  .ornament i:nth-child(2){
+    width:9px;height:9px;
+    background:var(--gold-2);
+  }
+
+  .big-num{
+    position:absolute;
+    right:-20px;
+    bottom:-100px;
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:420px;
+    line-height:.82;
+    letter-spacing:-.05em;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(201,169,97,.14);
+    pointer-events:none;
+    z-index:1;
+    user-select:none;
+    font-variation-settings:"opsz" 144, "SOFT" 50;
+  }
+
+  .title-slide{
+    padding:56px 76px 96px;
+    min-height:860px;
+  }
+  .title-slide .chrome{
+    border-bottom:1px solid var(--line);
+    margin-bottom:48px;
+  }
+  .title-slide h1{
+    text-align:center;
+    max-width:900px;
+    margin:0 auto 32px;
+  }
+  .title-slide .lead{
+    font-family:"Fraunces",serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:23px;
+    line-height:1.5;
+    color:var(--bone-2);
+    max-width:680px;
+    margin:0 auto 64px;
+    text-align:center;
+    letter-spacing:-.005em;
+  }
+  .title-slide .lead em{
+    color:var(--gold-2);
+    font-weight:400;
+  }
+
+  .portraits{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+    margin-top:16px;
+    position:relative;
+    z-index:2;
+  }
+  .portrait .meta{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+  .portrait .name{
+    font-family:"Fraunces",serif;
+    font-weight:300;
+    font-size:24px;
+    line-height:1.12;
+    letter-spacing:-.015em;
+    color:var(--bone);
+    font-variation-settings:"opsz" 144, "SOFT" 50;
+  }
+  .portrait .role{
+    font-family:"Jost",sans-serif;
+    font-size:10px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:right;
+    flex-shrink:0;
+    line-height:1.8;
+    padding-top:8px;
+    font-weight:400;
+  }
+
+  .bulbs{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:32px;
+    position:relative;
+    z-index:3;
+  }
+  .bulbs i{
+    display:block;
+    width:4px;height:4px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:
+      0 0 6px rgba(224,200,138,.7),
+      0 0 14px rgba(224,200,138,.35);
+  }
+  .bulbs i:nth-child(3n+2){
+    background:var(--gold-3);
+    box-shadow:none;
+  }
+
+  .stage-footer{
+    position:absolute;
+    left:0;right:0;
+    bottom:26px;
+    text-align:center;
+    font-family:"Italiana",serif;
+    font-size:11px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    z-index:3;
+  }
+  .stage-footer .diamond{
+    color:var(--gold);
+    margin:0 14px;
+    text-shadow:0 0 12px rgba(201,169,97,.5);
+  }
+
+  @media (max-width:860px){
+    body{padding:24px 8px 60px;}
+    .slide{padding:44px 28px 84px;}
+    .title-slide{padding:44px 28px 84px;}
+    .two-col,.portraits{grid-template-columns:1fr;gap:36px;}
+    h1{font-size:clamp(40px,10vw,64px);}
+    h2{font-size:clamp(28px,7vw,44px);max-width:none;}
+    p,li{font-size:16px;}
+    .stat .n{font-size:54px;}
+    blockquote{font-size:18px;padding-left:36px;}
+    blockquote::before{font-size:64px;top:-14px;}
+    ul.numbered li{padding-left:60px;}
+    ul.numbered li::before{font-size:28px;}
+    td:first-child{font-size:17px;width:auto;}
+    .big-num{font-size:220px;bottom:-50px;}
+    .frame{inset:10px;}
+    .portrait-img{height:400px;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- ═══════ 01 · ТИТУЛ ═══════ -->
+  <section class="slide title-slide">
+    <div class="frame"></div>
+
+    <header class="chrome">
+      <span class="chrome-mark">Пролог · Театр · XX век</span>
+      <span class="chrome-folio"><b>01</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="bulbs">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div style="position:relative;z-index:2;">
+      <h1>
+        <span class="kicker">Представление</span>
+        Люди, которые<br>
+        <em>изменили</em><br>
+        театр
+      </h1>
+
+      <p class="lead">Константин Станиславский и Владимир Немирович-Данченко — <em>два имени, определившие язык сцены</em> на сто лет вперёд.</p>
+
+      <div class="portraits">
+        <div class="portrait">
+          <div class="img-frame">
+            <img class="portrait-img"
+                 src="https://i.ibb.co/B28ZG7s8/image.png"
+                 alt="Константин Станиславский">
+          </div>
+          <div class="meta">
+            <div>
+              <div class="name">Константин Станиславский</div>
+            </div>
+            <div class="role">Актёр<br>Режиссёр</div>
+          </div>
+        </div>
+        <div class="portrait">
+          <div class="img-frame">
+            <img class="portrait-img"
+                 src="https://i.ibb.co/3xmjW2T/image.png"
+                 alt="Владимир Немирович-Данченко">
+          </div>
+          <div class="meta">
+            <div>
+              <div class="name">Владимир Немирович-Данченко</div>
+            </div>
+            <div class="role">Драматург<br>Режиссёр</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-footer">
+      <span class="diamond">◆</span> МХТ <span class="diamond">◆</span>
+    </div>
+  </section>
+
+  <!-- ═══════ 02 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Биография · Партитура I</span>
+      <span class="chrome-folio"><b>02</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Константин Сергеевич</span>
+          Константин <em>Станиславский</em>
+        </h2>
+
+        <p class="dropcap">Родился в <strong>1863 году</strong> в богатой московской купеческой семье. Отец — Сергей Владимирович Алексеев, был богатым и уважаемым купцом, мать — Елизавета Васильевна Алексеева, была дочерью французской актрисы и русского купца.</p>
+        <p>В <strong>1877 году</strong> он впервые выступил в домашнем любительском спектакле. Вокруг него сформировался Алексеевский кружок, который отличался серьезным подходом к театральному делу.</p>
+        <p>В <strong>1888 году</strong> Станиславский стал одним из основателей «Общества искусства и литературы». Этот театральный проект просуществовал около десяти лет и дал ему бесценный режиссерский и актерский опыт, который позже пригодился при создании МХТ.</p>
+
+        <div class="stat" style="margin-top:40px;">
+          <span class="n">1863</span>
+          <span class="lbl">Год рождения · Москва</span>
+        </div>
+        <div class="stat">
+          <span class="n">1888</span>
+          <span class="lbl">Общество искусства и литературы</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="portrait-img"
+               src="https://i.ibb.co/3y9Nf005/2026-09-21-15-04-42.png"
+               alt="Станиславский портрет">
+        </div>
+        <div class="caption">Константин Сергеевич Алексеев</div>
+      </div>
+    </div>
+
+    <div class="big-num">II</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Партитура I · Станиславский <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 03 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Биография · Партитура II</span>
+      <span class="chrome-folio"><b>03</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Владимир Иванович</span>
+          Владимир <em>Немирович-Данченко</em>
+        </h2>
+
+        <p class="dropcap">Знаменитый режиссер и основатель МХАТа родился в <strong>1858 году</strong> в грузинском городе Озургетти в семье подполковника Российской императорской армии Ивана Немировича-Данченко.</p>
+        <p>В <strong>1879 году</strong> он оставил учебу на физико-математическом факультете, чтобы полностью посвятить себя журналистике и литературе. В 1890-х годах стал одним из самых популярных драматургов России.</p>
+        <p>С <strong>1891 по 1901 год</strong> он преподавал в Музыкально-драматическом училище Московского филармонического общества. Среди его учеников были Иван Москвин, Ольга Книппер-Чехова и Всеволод Мейерхольд — будущие звезды и основатели группы МХТ.</p>
+
+        <div class="stat" style="margin-top:40px;">
+          <span class="n">1858</span>
+          <span class="lbl">Год рождения · Озургетти</span>
+        </div>
+        <div class="stat">
+          <span class="n">1891</span>
+          <span class="lbl">Начало преподавания · училище МФО</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="portrait-img"
+               src="https://i.ibb.co/B5K5TYs1/2026-09-21-15-05-49.png"
+               alt="Немирович-Данченко портрет">
+        </div>
+        <div class="caption">Владимир Иванович</div>
+      </div>
+    </div>
+
+    <div class="big-num">III</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Партитура II · Немирович-Данченко <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 04 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Москва · Ресторан</span>
+      <span class="chrome-folio"><b>04</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2 style="text-align:center;max-width:none;margin:0 auto 40px;">
+        <span class="kicker">Сцена вторая · Легендарная встреча</span>
+        Легендарная встреча в <em>«Славянском базаре»</em>
+      </h2>
+
+      <div style="text-align:center;">
+        <div class="img-frame hug" style="margin-bottom:40px;">
+          <img class="landscape-img"
+               src="https://i.ibb.co/6cK0nck4/2026-09-21-15-08-22.png"
+               alt="Станиславский и Немирович-Данченко вместе">
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p>Легендарная встреча состоялась <strong>22 июня 1897 года</strong> в московском ресторане «Славянский базар». Инициатором выступил Немирович-Данченко, пригласивший Станиславского для обсуждения будущего театра. Эта беседа стала исторической:</p>
+        </div>
+        <div>
+          <ul>
+            <li>Длилась она <strong>18 часов</strong> без перерыва.</li>
+            <li>Они обсудили все: от репертуара организации всего театра.</li>
+            <li>Записывали свои мысли прямо <strong>на скатерти</strong>.</li>
+          </ul>
+          <p>Было принято решение создать новый, общедоступный театр, который станет «протестом» против всего отжившего в театральном искусстве.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">IV</div>
+    <div class="stage-footer"><span class="diamond">◆</span> 22 июня 1897 · 18 часов <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 05 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Основание · МХТ</span>
+      <span class="chrome-folio"><b>05</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2>
+        <span class="kicker">Рождение театра</span>
+        Московский Художественный театр <em>имени А. П. Чехова</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <div class="two-col">
+        <div>
+          <p class="dropcap">Наши театроведы сразу разделили обязанности: Немирович-Данченко взял на себя литературную и организационную часть, а Станиславский — художественное и режиссерское руководство.</p>
+          <p>Основу новой труппы составили ученики Немировича-Данченко из Филармонического училища и актеры-любители из «Общества искусства и литературы» Константина Сергеевича.</p>
+        </div>
+        <div>
+          <p>Летом <strong>1898 года</strong> труппа собралась в подмосковном дачном местечке Пушкино, чтобы вдали от городской суеты начать работу над первыми спектаклями.</p>
+          <p>Официальное открытие МХТ состоялось <strong>14 (26) октября 1898 года</strong> премьерой трагедии А. К. Толстого «Царь Федор Иоаннович». Однако подлинным «рождением» театра и его символом стала постановка чеховской «Чайки» в декабре того же года, которая имела огромный успех.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">V</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Открытие · 14 октября 1898 <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 06 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Наследие · Принципы</span>
+      <span class="chrome-folio"><b>06</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Режиссёр и педагог</span>
+          Режиссёрские и педагогические принципы <em>Немировича-Данченко</em>
+        </h2>
+
+        <p>До последних дней он оставался директором и художественным руководителем МХАТа. В <strong>1943 году</strong>, незадолго до смерти, он добился создания Школы-студии МХАТ, которая по сей день носит его имя, воспитав несколько поколений выдающихся актеров.</p>
+        <p>Обладал психологическим анализом образов и тонкостью режиссерских приемов. Умел точно воссоздавать общественную среду и передавать неповторимый стиль автора.</p>
+        <p>Совместно со Станиславским он поставил все основные пьесы Чехова («Чайка», «Дядя Ваня», «Три сестры», «Вишневый сад»), а также спектакль «На дне».</p>
+        <p>В более поздний период он осуществил и самостоятельные постановки, такие как «Анна Каренина» (1937) и легендарный спектакль «Три сестры» (1940), которые считаются вершинами его режиссуры.</p>
+        <p>Именно он первым понял гений Чехова и настоял на постановке «Чайки». Он же привлек к сотрудничеству Максима Горького и помогал ему советами при создании пьес «Мещане» и «На дне».</p>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="landscape-img"
+               src="https://i.ibb.co/pv9xVzNN/2026-09-21-15-08-56.png"
+               alt="Чехов, Немирович-Данченко и актриса">
+        </div>
+        <div class="caption">Творческий союз · 1900-е</div>
+      </div>
+    </div>
+
+    <div class="big-num">VI</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Школа-студия МХАТ · 1943 <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 07 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Метод · Подход</span>
+      <span class="chrome-folio"><b>07</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Внутренний мир роли</span>
+          Станиславский как <em>режиссёр и педагог</em>
+        </h2>
+
+        <p class="dropcap">Константин Сергеевич изменил театр изнутри. Актеры должны были не изображать, а <strong>существовать внутри роли</strong>. Его режиссерский подход превратился в скрупулезное изучение человеческой психологии.</p>
+        <p>Каждая деталь постановки – от мизансцены до света – служила единственной цели: подлинности чувства. Его упражнения тренировали внимание, воображение, умение действовать в предлагаемых обстоятельствах, чтобы актер начинал жить жизнью своего персонажа.</p>
+        <p>Станиславский переместил акцент с внешнего на внутреннее.</p>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="portrait-img"
+               src="https://i.ibb.co/VYYBKRyN/2026-09-21-15-09-58.png"
+               alt="Афиша Чайка МХТ">
+        </div>
+        <div class="caption">Афиша спектакля</div>
+      </div>
+    </div>
+
+    <div class="big-num">VII</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Существовать внутри роли <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 08 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Система · Основа</span>
+      <span class="chrome-folio"><b>08</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2>
+        <span class="kicker">Философия сцены</span>
+        На чем основывается <em>система Станиславского ?</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <div class="two-col">
+        <div>
+          <div class="img-frame">
+            <img class="landscape-img"
+                 src="https://i.ibb.co/cS2MsLZv/2026-09-21-15-10-39.png"
+                 alt="Актёр с черепом · Гамлет">
+          </div>
+          <div class="caption">Сцена как лаборатория</div>
+        </div>
+
+        <div>
+          <h3>На природу человека</h3>
+          <p>Станиславский считал, что законы психики и физики на сцене такие же, как в жизни. Нервы, мышцы, эмоции — всё работает одинаково.</p>
+
+          <h3>На принципе «Переживания»</h3>
+          <p>Актер должен не изображать чувство (плакать понарошку), а вызвать его в себе через веру в вымысел.</p>
+
+          <h3>На связи тела и души</h3>
+          <p>Нельзя сыграть душу, не настроив тело, и наоборот. Это психофизическое единство.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">VIII</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Психофизическое единство <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 09 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Пять принципов · Канон</span>
+      <span class="chrome-folio"><b>09</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2 style="max-width:none;">
+        <span class="kicker">Канон артиста</span>
+        5 принципов системы <em>Станиславского</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <ul class="numbered">
+        <li><strong>Правда переживаний</strong> — связь между эмоциями актера и ощущениями зрителя: чем больше актер чувствует свою игру и точнее передает переживания героя, тем больше зритель верит происходящему на сцене.</li>
+        <li><strong>Работа в предлагаемых обстоятельствах</strong> — от обстоятельств зависят мысли, эмоции и поведение, актер должен понимать логику своего героя, поступать так же, как поступил бы тот в той или иной ситуации. Три круга обстоятельств: Большой круг – общая социальная, историческая обстановка, в которой находится персонаж. Средний круг – подробности жизни героя. Малый круг – те события, которые происходят с персонажем в данный момент и влияют на него.</li>
+        <li><strong>Здесь и сейчас</strong> – актер каждый раз должен переживать роль по-новому.</li>
+        <li><strong>Самосовершенствование</strong> — чтобы достичь успеха, актер должен постоянно совершенствоваться, воспитывать в себе нужные для работы качества.</li>
+        <li><strong>Сценическое взаимодействие</strong> — между коллегами должна быть атмосфера доверия, полного понимания и взаимопомощи. Партнеры, которые чувствуют друг друга, добиваются идеальной игры и завоёвывают сердца зрителей.</li>
+      </ul>
+
+      <div style="text-align:center;">
+        <div class="img-frame hug" style="margin-top:36px;">
+          <img class="landscape-img"
+               src="https://i.ibb.co/4gmSPnK4/2026-09-21-15-11-26.png"
+               alt="Репетиция МХТ">
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">IX</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Пять принципов · канон артиста <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 10 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Метод · Открытие</span>
+      <span class="chrome-folio"><b>10</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Открытие 1935 года</span>
+          Метод <em>действенного анализа</em>
+        </h2>
+
+        <p class="dropcap">Открытие К. С. Станиславского, сделанное им в <strong>1935 году</strong>. Он возник как реакция на недостатки «застольного периода», который, по мнению мастера, делал актеров пассивными и отрывал анализ пьесы от живого действия.</p>
+        <p><strong>Цель метода:</strong> с первых шагов включить в работу не только ум, но и все существо актера, чтобы он чувствовал себя в роли органично и правдиво.</p>
+        <p>В разработке и теоретическом осмыслении метода ключевую роль сыграла ученица Станиславского <strong>М. О. Кнебель</strong>, которая ввела сам термин «метод действенного анализа пьесы и роли» и написала фундаментальную работу по этой теме. Затем метод действенного анализа усовершенствовал Георгий Товстоногов.</p>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="portrait-img"
+               src="https://i.ibb.co/R4ydFjVW/2026-09-21-15-12-08.png"
+               alt="М. О. Кнебель">
+        </div>
+        <div class="caption">«О действенном анализе пьесы и роли»</div>
+      </div>
+    </div>
+
+    <div class="big-num">X</div>
+    <div class="stage-footer"><span class="diamond">◆</span> М. О. Кнебель · Георгий Товстоногов <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 11 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Драматургия · Событийный ряд</span>
+      <span class="chrome-folio"><b>11</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2>
+        <span class="kicker">Композиция действия</span>
+        <em>События</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <table>
+        <tr>
+          <th>Тип события</th>
+          <th>Описание</th>
+        </tr>
+        <tr>
+          <td>Исходное событие</td>
+          <td>Происходит до начала пьесы. Это событие, в котором уже зародился конфликт, оно предшествует всему, что увидят зрители.</td>
+        </tr>
+        <tr>
+          <td>Основное событие</td>
+          <td>Здесь вступает в силу основной конфликт пьесы. Начинается борьба по сквозному действию.</td>
+        </tr>
+        <tr>
+          <td>Центральное событие</td>
+          <td>Пик развития конфликта, наивысшая точка борьбы, в которую вовлечены все персонажи.</td>
+        </tr>
+        <tr>
+          <td>Финальное событие</td>
+          <td>Здесь заканчивается борьба по сквозному действию, ведущее предлагаемое обстоятельство исчерпывается.</td>
+        </tr>
+        <tr>
+          <td>Главное событие</td>
+          <td>Происходит за рамками пьесы, после последней реплики. В нем «просветляется» идея произведения, и мы узнаем, что стало с героями.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="big-num">XI</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Пять событий · сквозное действие <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 12 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Триумф · Премьера</span>
+      <span class="chrome-folio"><b>12</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2 style="text-align:center;max-width:none;margin:0 auto 40px;">
+        <span class="kicker">29 декабря 1898</span>
+        «Чайка» <em>в МХТ</em>
+      </h2>
+
+      <div class="two-col" style="margin-bottom:36px;">
+        <div>
+          <div class="img-frame">
+            <div class="img-ph tall"><span>Фото · А. П. Чехов</span></div>
+          </div>
+          <div class="caption">Антон Павлович Чехов</div>
+        </div>
+        <div>
+          <div class="img-frame">
+            <div class="img-ph tall"><span>Фото · Занавес МХТ · силуэт чайки</span></div>
+          </div>
+          <div class="caption">Эмблема театра · 1898</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p>Премьера состоялась <strong>29 декабря 1898 года</strong>. Это был вечер, полный драматизма. Вся труппа, включая Станиславского, пребывала в крайнем волнении. Он вспоминал: «...от всех актеров пахло валериановыми каплями» и «мне было страшно сидеть в темноте и спиной к публике во время монолога Заречной, и я незаметно придерживал ногу, которая нервно тряслась».</p>
+          <p>Когда занавес закрылся после первого акта, в зале воцарилась зловещая тишина. Актеры, уверенные в провале, прижались друг к другу, кто-то заплакал. А затем случилось чудо. По словам Станиславского, «публика разразилась стоном и аплодисментами». Прием был оглушительным. За кулисами началась «настоящая пасха»: артисты целовались, плакали и танцевали от радости.</p>
+        </div>
+        <div>
+          <p>Успех был колоссальным и для публики, и для прессы, которые единогласно признали спектакль триумфом. В ту же ночь автору, Антону Павловичу Чехову, была отправлена восторженная телеграмма от труппы и зрителей. Позже Чехов подарил Немировичу-Данченко медальон с гравировкой: «Ты дал моей "Чайке" жизнь. Спасибо!»</p>
+          <p>Силуэт чайки, изображенный на занавесе, стал эмблемой Московского Художественного театра, которая остается его символом по сей день.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">XII</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Триумф · силуэт чайки <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 13 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">История · Раскол</span>
+      <span class="chrome-folio"><b>13</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2>
+        <span class="kicker">После основателей</span>
+        Что случилось с театром <em>после смерти основателей?</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <div class="two-col">
+        <div>
+          <p class="dropcap">После ухода основателей МХАТ прошел через несколько этапов, кульминацией которых стал <strong>раскол театра в 1987 году</strong>. После 1938 года театр продолжал жить. Его возглавляли ученики и последователи. В 1943 году при театре была создана знаменитая Школа-студия МХАТ. Театр окончательно утвердился как главный драматический театр страны.</p>
+        </div>
+        <div>
+          <p>К 1980-м годам внутри театра назрел серьезный творческий конфликт. Одна часть труппы во главе с <strong>Олегом Ефремовым</strong> стремилась к обновлению театрального языка, другая, во главе с <strong>Татьяной Дорониной</strong>, отстаивала верность классическим традициям. В результате театр официально разделился на два самостоятельных коллектива:</p>
+          <ul>
+            <li><strong>МХТ им. А. П. Чехова</strong> — остался в историческом здании в Камергерском переулке.</li>
+            <li><strong>МХАТ им. М. Горького</strong> — переехал в здание на Тверском бульваре.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <div class="img-frame hug" style="margin-top:36px;">
+          <img class="landscape-img"
+               src="https://i.ibb.co/d8pcCyx/2026-09-21-15-13-11.png"
+               alt="Памятник Станиславскому и Немировичу-Данченко">
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">XIII</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Раскол · 1987 <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 14 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Сегодня · Два театра</span>
+      <span class="chrome-folio"><b>14</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2>
+        <span class="kicker">Две сцены · два имени</span>
+        МХТ <em>сегодня!</em>
+      </h2>
+
+      <div class="ornament"><i></i><i></i><i></i></div>
+
+      <div class="two-col">
+        <div>
+          <div class="img-frame" style="margin-bottom:18px;">
+            <img class="portrait-img"
+                 src="https://i.ibb.co/MYcLGfc/2026-09-21-15-13-55.png"
+                 alt="Константин Хабенский">
+          </div>
+          <div class="caption" style="margin-top:0;margin-bottom:22px;">МХТ им. А. П. Чехова · Камергерский переулок</div>
+          <p>Театр, который находится в историческом здании в Камергерском переулке и носит имя Чехова, с 2018 года возглавляет народный артист России <strong>Константин Хабенский</strong>. Под его руководством театр сочетает постановки, в которых узнается традиция «переживания», с поисками нового сценического языка. Репертуар строится на русской классике, современной драматургии и экспериментальных формах.</p>
+        </div>
+        <div>
+          <div class="img-frame" style="margin-bottom:18px;">
+            <img class="portrait-img"
+                 src="https://i.ibb.co/hRJW6DSc/image.png"
+                 alt="Сергей Безруков">
+          </div>
+          <div class="caption" style="margin-top:0;margin-bottom:22px;">МХАТ им. М. Горького · Тверской бульвар</div>
+          <p>Театр, который находится на Тверском бульваре возглавляет народный артист России <strong>Сергей Безруков</strong>, который сформулировал свою позицию так: театр должен быть «не модным, а нужным», ориентироваться на диалог со зрителем, а не на сиюминутные тренды. Он подчёркивает: «Не надо гнаться за супертехнологиями и быть прямо супермодным. Нужно быть нужным театром, полезным театром, и чтобы глаз невозможно было оторвать от артистов, которые на сцене живут, а не играют».</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">XIV</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Камергерский · Тверской <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 15 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Постановка · Работа</span>
+      <span class="chrome-folio"><b>15</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div class="two-col wide-left" style="position:relative;z-index:3;">
+      <div>
+        <h2>
+          <span class="kicker">Рождение спектакля</span>
+          «Три сестры» <em>Немировича-Данченко</em>
+        </h2>
+
+        <h3>Рождение спектакля: работа над пьесой</h3>
+
+        <p class="dropcap">Хотя Чехов написал «Трёх сестёр» специально для МХТ в 1900 году, Немирович-Данченко вернулся к этой пьесе спустя почти 40 лет. Работа над новой постановкой началась в <strong>январе 1939 года</strong>.</p>
+        <p>Репетиции стали настоящей школой для актеров: мастер скрупулезно разбирал с ними чеховский подтекст, характеры и «тоску по лучшей жизни», которую он видел главной идеей спектакля.</p>
+        <p>Эта работа была уникальна тем, что Немирович-Данченко постоянно обращался к наследию автора, ведя со своей труппой «живой рассказ о Чехове» и позволяя им проникнуть в творческую лабораторию драматурга. Именно благодаря такому глубокому подходу спектакль и стал легендарным.</p>
+      </div>
+
+      <div>
+        <div class="img-frame">
+          <img class="landscape-img"
+               src="https://i.ibb.co/9388g2gt/2026-09-21-15-15-15.png"
+               alt="Сцена из спектакля Три сестры">
+        </div>
+        <div class="caption">МХАТ · 1940</div>
+      </div>
+    </div>
+
+    <div class="big-num">XV</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Работа началась в январе 1939 <span class="diamond">◆</span></div>
+  </section>
+
+  <!-- ═══════ 16 ═══════ -->
+  <section class="slide">
+    <div class="frame"></div>
+    <header class="chrome">
+      <span class="chrome-mark">Отклик · Критика</span>
+      <span class="chrome-folio"><b>16</b><span class="sep">/</span>16</span>
+    </header>
+
+    <div style="position:relative;z-index:3;">
+      <h2 style="text-align:center;max-width:none;margin:0 auto 40px;">
+        <span class="kicker">Голоса современников</span>
+        <em>Критика</em>
+      </h2>
+
+      <div class="two-col">
+        <div>
+          <div class="img-frame">
+            <img class="portrait-img"
+                 src="https://i.ibb.co/Q3M4qFgy/2026-09-21-16-01.png"
+                 alt="Афиша радиоспектакль Три сестры">
+          </div>
+          <div class="caption">Запись 1947 года</div>
+        </div>
+
+        <div>
+          <p>Немирович-Данченко сознательно отказывался от музейного подхода. Его знаменитая фраза гласит: «Любую пьесу Чехова каждый раз надо ставить заново. Надо подойти к ней с нашими сегодняшними глазами и чувствами. А не глазами хорошего музея». Он искал в пьесе «подводное течение» — то, что скрыто за бытовыми диалогами. В процессе работы режиссёр признавался, что театр стоял перед опасностью «либо попасть в плакат, либо захолодить.</p>
+
+          <h3>Критика</h3>
+
+          <blockquote>
+            <p>«...миллионы и миллионы пройдут сквозь этот спектакль, как сквозь очистительную купель... это то духовное оружие, которое помогает людям в их жизни».</p>
+            <span class="quote-author">И. Юзовский · критик</span>
+          </blockquote>
+
+          <blockquote>
+            <p>«Владимир Иванович повернул трех сестер в зрительный зал, и напряженные глаза прошлого взглянули в глаза современных людей. Это был встречный взгляд, который так редко удается в искусстве...».</p>
+            <span class="quote-author">С. Михоэлс · актёр и режиссёр</span>
+          </blockquote>
+
+          <blockquote>
+            <p>«"Три сестры" на меня действуют как симфония».</p>
+            <span class="quote-author">В. Вронская · актриса МХАТ</span>
+          </blockquote>
+
+          <p><strong>Значение для театра:</strong> Постановка 1940 года считается «новым символом веры Художественного театра» и одной из наиболее значимых интерпретаций пьесы за всю её сценическую историю.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-num">XVI</div>
+    <div class="stage-footer"><span class="diamond">◆</span> Финал <span class="diamond">◆</span></div>
+  </section>
+
+</div>
+</body>
+</html>
